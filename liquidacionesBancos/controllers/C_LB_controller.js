@@ -1,53 +1,51 @@
-const consulta = require('../model/M_Consultas')
-const reporteria = require('../model/M_Reportes')
-const insert = require('../model/M_Insert')
-const update = require('../model/M_Update')
-const estado = require('../model/M_Inactiva')
+const consulta = require('../models/M_LB_consultas');
+//const reporteria = require('../model/M_Reportes');
+const insert = require('../models/M_LB_insert');
+//const update = require('../model/M_Update');
+//const estado = require('../model/M_Inactiva');
 const oracledb = require('oracledb');
 
-
-async function C_function(req, res) {
+async function C_liquidaciones(req, res) {
+    console.log(req.params.id.toString());
     try {
         switch (req.params.id) {
+      
             case '0':
-                insert.M_I_poz_rubro(req.body).then(async resolve => {
+                try {
+                    console.log(req.params.id);
+                    const resolve = await insert.M_I_cargaLiqui(req.body);
                     resolve.descrip = await errores(resolve.codigo);
                     res.status(200).json(resolve);
-                });
+                } catch (error) {
+                    console.error('Error en insert.M_I_cargaLiqui:', error);
+                    res.status(500).json({ 'estado': false, 'codigo': 500, 'descrip': 'Error en inserción' });
+                }
                 break;
             case '1':
-                consulta.M_C_poz_rubro(req.body).then(async resolve => {
+                try {
+                    console.log('malo');
+                    const resolve = await consulta.M_LB_consulta(req.body);
                     if (resolve.estado === false) {
                         resolve.descrip = await errores(resolve.codigo);
                     }
                     res.status(200).json(resolve);
-                });
+                } catch (error) {
+                    console.error('Error en consulta.M_LB_consulta:', error);
+                    res.status(500).json({ 'estado': false, 'codigo': 500, 'descrip': 'Error codigo CONS' });
+                }
                 break;
-            case '2':
-                update.M_U_poz_rubro(req.body).then(async resolve => {
-                    resolve.descrip = await errores(resolve.codigo);
-                    res.status(200).json(resolve);
-                });
-                break;
-            case '3':
-                estado.M_E_poz_rubro(req.body).then(async resolve => {
-                    resolve.descrip = await errores(resolve.codigo);
-                    res.status(200).json(resolve);
-                });
-                break;
+           
             default:
                 res.status(400).json({ 'estado': false, 'codigo': 206, 'descrip': 'Error en Consulta a Oracle' });
                 break;
         }
-} catch (error) {
-        console.error('Controller.C_function.catch : ', error)
-        res.status(400).json({ 'estado': false, 'codigo': 206, 'descrip': 'Error en Consulta a Oracle' })
+    } catch (error) {
+        console.error('Controller.C_liquidaciones.catch : ', error);
+        res.status(400).json({ 'estado': false, 'codigo': 206, 'descrip': 'Error en Consulta a Oracle' });
     }
 }
 
-
-
-module.exports = {C_function}
+module.exports = { C_liquidaciones };
 
 function errores(cod){
     return new Promise(async (resolve, reject) => {

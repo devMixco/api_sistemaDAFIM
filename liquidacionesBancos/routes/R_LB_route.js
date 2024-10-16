@@ -1,9 +1,13 @@
 const express = require('express');
-const liquidacionesBancosController = require('../controllers/liquidacionesBancosController');
+const liquidacionesBancosController = require('../controllers/C_LB_controller');
 
 let api = express.Router();
 
-api.post('/ruta/:id',liquidacionesBancosController.C_function);
+
+const bodyParser = require('body-parser');
+const validateJson = require('../middleware/validaJson'); 
+
+api.post('/liquiWeb/:id',validateJson,liquidacionesBancosController.C_liquidaciones);
 
 
 

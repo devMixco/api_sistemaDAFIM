@@ -3,7 +3,7 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
-//var cons = require('./routes/R_Consultas.js')
+var cons = require('./liquidacionesBancos/routes/R_LB_route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,6 +56,6 @@ app.get('/view/:filename', (req, res) => {
 });
 
 ////////////////////////////////////
-//app.use(cons);
+app.use(cons);
 
 module.exports = app;
