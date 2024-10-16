@@ -3,7 +3,7 @@ const oracledb = require('oracledb');
 const config = require('config');
 const colors = require('colors');
 const app = require('./app');
-const port = 4302
+const port = 4405
 const mongoose = require('mongoose');
 
 
@@ -18,7 +18,7 @@ async function startup() {
     try {
         await oracledb.createPool(config.get('oracle'));
         console.log('Conexion a Oracle Exitosa'.underline.yellow);
-        await mongo()
+ //       await mongo()
         await server()
     } catch (err) {
         console.error('index.startup : ',err);
