@@ -4,14 +4,15 @@ const router = express.Router();
 
 // Middleware to validate JSON data
 function validateJson(req, res, next) {
-    const body = req.body;
-    
+
+
     // Example validation logic
-    console.log(body === undefined || typeof body !== 'object')
-    if (body === undefined ) {
-        res.status(400).json({ error: 'JSON INVALIDO' });
+
+    if (Object.keys(req.body).length === 0|| typeof req.body !== 'object'||!req.body) {
+        res.status(400).json({'estado': false, 'codigo': 238,'descrip':'FORMATO DE JSON INVALIDO'});
    
     }else{
+        
         next();
     }
 

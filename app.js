@@ -3,7 +3,7 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
-var cons = require('./liquidacionesBancos/routes/R_LB_route');
+var cons = require('./liquidacionesWeb/routes/R_LB_route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

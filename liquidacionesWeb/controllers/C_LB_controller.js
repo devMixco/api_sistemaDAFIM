@@ -4,33 +4,34 @@ const insert = require('../models/M_LB_insert');
 //const update = require('../model/M_Update');
 //const estado = require('../model/M_Inactiva');
 const oracledb = require('oracledb');
-
+const moment = require('moment');
 async function C_liquidaciones(req, res) {
-    console.log(req.params.id.toString());
+
+
     try {
         switch (req.params.id) {
       
             case '0':
                 try {
-                    console.log(req.params.id);
+           
                     const resolve = await insert.M_I_cargaLiqui(req.body);
                     resolve.descrip = await errores(resolve.codigo);
                     res.status(200).json(resolve);
                 } catch (error) {
-                    console.error('Error en insert.M_I_cargaLiqui:', error);
+                    console.error(moment().format('DD/MM/YYYY HH:mm:ss') + 'Error en insert.M_I_cargaLiqui:', error);
                     res.status(500).json({ 'estado': false, 'codigo': 500, 'descrip': 'Error en inserción' });
                 }
                 break;
             case '1':
                 try {
-                    console.log('malo');
+              
                     const resolve = await consulta.M_LB_consulta(req.body);
                     if (resolve.estado === false) {
                         resolve.descrip = await errores(resolve.codigo);
                     }
                     res.status(200).json(resolve);
                 } catch (error) {
-                    console.error('Error en consulta.M_LB_consulta:', error);
+                    console.error(moment().format('DD/MM/YYYY HH:mm:ss') + 'Error en Controller.consulta.M_LB_consulta:', error);
                     res.status(500).json({ 'estado': false, 'codigo': 500, 'descrip': 'Error codigo CONS' });
                 }
                 break;

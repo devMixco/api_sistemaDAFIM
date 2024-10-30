@@ -4,7 +4,7 @@
         "uri": "mongodb+srv://remEmix:emixDBM0ng.At14s@cluster0.x2xts.mongodb.net/Arbitrios?retryWrites=true&w=majority"
     },
     "oracle": {
-        "user": "RRHH",
+        "user": "MIXCO",
         "password": "GSEMIX19$",
         "connectString": "(DESCRIPTION=(ADDRESS = (PROTOCOL = TCP)(HOST = 10.123.100.1)(PORT = 1521))(CONNECT_DATA = (SERVICE_NAME = mixco)))",
         "poolMin": 2,
