@@ -3,7 +3,7 @@ const oracledb = require('oracledb');
 const config = require('config');
 const colors = require('colors');
 const app = require('./app');
-const port = 4405;
+const port = 4605;
 const mongoose = require('mongoose');
 
 console.info(('ambiente: ' + config.get('Environment')).underline.red);
