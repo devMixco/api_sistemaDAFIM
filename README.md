@@ -1,0 +1,8 @@
+http://localhost:4302/liquiWeb/1
+
+
+{"CONS":1,
+"FECHA1":"14/10/2024",
+"FECHA2":"15/10/2024",
+"USUARIO_ACTUALIZACION":"FGGONZALEZ"
+}
