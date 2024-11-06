@@ -3,7 +3,7 @@ const moment = require('moment');
 async function M_LB_consulta(array) {
     return new Promise(async (resolve, reject) => {
         console.log(array)
-        let queriFinal
+       // let queriFinal
     
       switch(array.CONS){
 
@@ -144,7 +144,7 @@ ORDER BY fec_grabacion desc`;
             console.log(queriFinal)
 
             const result = await conn.execute(queriFinal)
-            console.log(array, result.rows)
+           // console.log(array, result.rows)
             if (result.rows[0] != undefined) {
                 resolve(result.rows)
             } else {
