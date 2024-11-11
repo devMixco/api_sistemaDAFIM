@@ -58,6 +58,7 @@ app.get('/view/:filename', (req, res) => {
 });
 
 ////////////////////////////////////
-app.use(cons, cons2);
+app.use(cons);
+app.use(cons2);
 
 module.exports = app;
