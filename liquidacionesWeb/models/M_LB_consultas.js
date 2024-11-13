@@ -115,8 +115,8 @@ ORDER BY fec_transaccion DESC,TIPO asc,estado_transaccion ASC`;
 
            case 5 :
            queriFinal = `select  to_char(fec_grabacion,'HH24:MI:SS') hora,decode(id_origen,1,'WEB',5,'APP')ORIGEN,codigo,monto,
-           estado_transaccion ESTADO,decode(tipo,1,'AGUA',2,'IUSI',4,'REMISIONES',6,'BOLETO')tipo_pago,
-           to_char(fec_transaccion,'dd/mm/yyyy') FECHA_TRANSACCION,DESCRIPCION
+            estado_transaccion ESTADO,decode(tipo,1,'AGUA',2,'IUSI',4,'REMISIONES',6,'BOLETO')tipo_pago,
+           to_char(fec_transaccion,'dd/mm/yyyy') FECHA_TRANSACCION,DESCRIPCION,correo,tarjeta,decode(autorizacion,null,' -- ',autorizacion)AUTORIZACION
 from LOG_TRANSACCIONES_PAGOS_WEB 
 WHERE  AMBIENTE = 'api.cybersource.com'
 and trunc(fec_transaccion) = to_date('${array.FECHA_1}','dd/mm/yyyy')
@@ -127,7 +127,7 @@ ORDER BY fec_grabacion DESC,TIPO asc,estado_transaccion ASC`;
 
            case 6 :
             queriFinal = `select to_char(fec_grabacion, 'dd/mm/yyyy hh24:mi:ss') fecha_grabacion,decode(tipo,1,'AGUA',2,'IUSI',4,'REMISIONES',6,'BOLETO')tipo,
-            codigo,decode(id_origen,1,'WEB',5,'APP')ORIGEN,estado_transaccion ESTADO,descripcion,correo,tarjeta,autorizacion,MONTO
+            codigo,decode(id_origen,1,'WEB',5,'APP')ORIGEN,estado_transaccion ESTADO,descripcion,correo,tarjeta,decode(autorizacion,null,' -- ',autorizacion)AUTORIZACION,MONTO
 from LOG_TRANSACCIONES_PAGOS_WEB 
 where trunc(fec_transaccion) = trunc(sysdate)
 and AMBIENTE = 'api.cybersource.com'
