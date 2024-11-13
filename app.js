@@ -4,6 +4,8 @@ var express = require('express');
 var bodyParser = require('body-parser')
 var app = express();
 var cons = require('./liquidacionesWeb/routes/R_LB_route');
+var cons2 = require('./TrasladodeRutas/routes/R_TR_route');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -57,5 +59,6 @@ app.get('/view/:filename', (req, res) => {
 
 ////////////////////////////////////
 app.use(cons);
+app.use(cons2);
 
 module.exports = app;
